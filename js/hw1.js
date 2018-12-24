@@ -10,17 +10,20 @@ console.log(string[0].toUpperCase());
 console.log(string[string.length-1].toUpperCase());
 
 // 3. Найти положение слова ‘string’ в строке
-console.log(string.indexOf('string'));
+console.log(string.indexOf('string') + 1); //номер символа по счету, с которого начинается слово string
+console.log(string.indexOf('string')); //номер индекса, с которого начинается слово string
 
 // 4. Найти положение второго пробела (“вручную” ничего не считать)
 console.log(string.substr(string.indexOf(' ') + 1).indexOf(' ') + string.indexOf(' ') + 1); //решение в общем случае
 console.log(string.lastIndexOf(' ')); //решение для нашей строки
 
 // 5. Получить строку с 5-го символа длиной 4 буквы
-console.log(string.substr(5, 4));
+console.log(string.substr(4, 4)); //с 5го символа
+console.log(string.substr(5, 4)); //с 5го индекса
 
 // 6. Получить строку с 5-го по 9-й символы
-console.log(string.substring(5, 9));
+console.log(string.substring(4, 8)); //с 5го по 9й символ
+console.log(string.substring(5, 9)); //с 5го по 9й индекс
 
 // 7. Получить новую строку из исходной путем удаления последних 6-и символов
 //    (то есть исходная строка без последних 6и символов)
