@@ -14,6 +14,10 @@ console.log(string.indexOf('string') + 1); //номер символа по сч
 console.log(string.indexOf('string')); //номер индекса, с которого начинается слово string
 
 // 4. Найти положение второго пробела (“вручную” ничего не считать)
+//Поиск номера символа второго пробела по счету
+console.log(string.substr(string.indexOf(' ') + 1).indexOf(' ') + string.indexOf(' ') + 2); //решение в общем случае
+console.log(string.lastIndexOf(' ') + 1); //решение для нашей строки
+//Поиск индекса второго пробела
 console.log(string.substr(string.indexOf(' ') + 1).indexOf(' ') + string.indexOf(' ') + 1); //решение в общем случае
 console.log(string.lastIndexOf(' ')); //решение для нашей строки
 
