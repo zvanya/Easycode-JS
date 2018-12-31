@@ -117,7 +117,7 @@ for (let i = 0; i < n; i++) {
 for (let n of numbers) {
     factorial = factorial * n;
 }
-console.log(`factorial = ${factorial}`)
+console.log(`factorial = ${factorial}`);
 
 // 3.4 На основе строки “JavaScript is a pretty good language” сделать новую строку,
 //     где каждое слово начинается с большой буквы, а пробелы удалены. Использовать for.
