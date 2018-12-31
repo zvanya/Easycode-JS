@@ -178,10 +178,9 @@ let list = {
     age: 29
 };
 
-for (let listItem in list) {
-    if (typeof(list[listItem]) === "string") {
-        list[listItem] = list[listItem].toUpperCase();
+for (let key in list) {
+    if (typeof(list[key]) === "string") {
+        list[key] = list[key].toUpperCase();
     }
 }
-
 console.log(list);
