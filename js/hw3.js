@@ -67,18 +67,12 @@ car.needRepair = car.age > 5 ? ( console.log("Need Repair"), true ) : false;
 let line = "i am in the easycode";
 let newLine = "";
 
-if (line[0].charCodeAt(0) !== 32) {
-    newLine = newLine + line[0].toUpperCase();
-} else {
-    newLine = newLine + line[0];
-}
-
-for (let i = 1; i < line.length; i++) {
-    if (line[i].charCodeAt(0) !== 32 && line[i - 1].charCodeAt(0) === 32) {
-        newLine = newLine + line[i].toUpperCase();
-        continue;
+for (let i = 0; i < line.length; i++) {
+    if (line[i - 1].charCodeAt(0) === 32 || i === 0) {
+        newLine += line[i].toUpperCase();
+    } else {
+        newLine += line[i];
     }
-    newLine = newLine + line[i];
 }
 
 console.log(line);
@@ -90,7 +84,7 @@ let s1 = "tseb eht ma i";
 let s2 = "";
 
 for (let i = s1.length-1; i >= 0 ; i--) {
-    s2 = s2 + s1[i];
+    s2 += s1[i];
 }
 
 console.log(s2);
@@ -126,14 +120,14 @@ let str = " JavaScript  is  a pretty good   language   ";
 let newStr = "";
 
 if (str[0] !== " ") {
-    newStr = newStr + str[0].toUpperCase();
+    newStr += str[0].toUpperCase();
 }
 
 for (let i = 1; i < str.length; i++) {
     if (str[i] !== " " && str[i-1] === " ") {
-        newStr = newStr + str[i].toUpperCase();
+        newStr += str[i].toUpperCase();
     } else if (str[i] !== " ") {
-        newStr = newStr + str[i];
+        newStr += str[i];
     }
 }
 
@@ -147,7 +141,7 @@ let min = 1;
 let max = 15;
 
 for (let i = min; i <= max ; i++) {
-    if (i % 2 !== 0) console.log(i);
+    if (i % 2) console.log(i);
 }
 
 // ----------- array. for of ------------ https://learn.javascript.ru/array
@@ -159,7 +153,7 @@ for (let i = 0; i < 15; i++) {
 }
 
 for (let item of arr) {
-    if (item % 2 !== 0) newArr.push(item);
+    if (item % 2) newArr.push(item);
 }
 
 console.log(newArr);
