@@ -68,7 +68,7 @@ let line = "i am in the easycode";
 let newLine = "";
 
 for (let i = 0; i < line.length; i++) {
-    if (line[i - 1].charCodeAt(0) === 32 || i === 0) {
+    if (i === 0 || line[i - 1].charCodeAt(0) === 32) {
         newLine += line[i].toUpperCase();
     } else {
         newLine += line[i];
