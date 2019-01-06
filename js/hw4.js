@@ -133,7 +133,7 @@ function getArray(n) {
     if (n <= 0) return err[1];
 
     for (let i = 0; i < n; i++) {
-        arr.push(i++);
+        arr.push(i+1);
     }
     
     return arr;
