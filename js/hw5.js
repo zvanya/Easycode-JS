@@ -119,6 +119,15 @@ function every(arr, callback) {
     return res;
 }
 
+function isPositive(number) {
+    return number > 0;
+}
+
+arr = [1, 12, 2, 32, 3];
+console.log(`res = ${every(arr, isPositive)}`);
+arr = [1, 12, 2, 32, -3];
+console.log(`res = ${every(arr, isPositive)}`);
+
 // ******************* Перебирающие методы ****************************************************************************
 
 // 1. На основе массива [1,2,3,5,8,9,10] сформировать новый массив,
