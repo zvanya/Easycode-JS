@@ -40,10 +40,12 @@ function stringConversion(arr, callback) {
         str += newValue;
     }
     
+    if (str.slice(-2) === ", ") return str.substring(0, str.length-2);
+    
     return str;
 }
 
-function toConcatUppFirstLetter(str) {
+function getUppFirstLetter(str) {
     
     if (typeof(str) !== "string") return false;
     
@@ -58,25 +60,64 @@ function toConcatUppFirstLetter(str) {
 
 function getMultiplication10(value) {
     
-    if (!isNumeric(value)) return false;
+    return isNumeric(value) ? value * 10 + ", " : false;
+}
+
+function getUserInfo(user) {
+
+    if ("name" in user && "age" in user && typeof(user.name) === "string" && isNumeric(user.age))
+        return user.name + " is " + user.age + ", ";
+    else
+        return false;
+}
+
+function getReverseString(str) {
     
-    return value * 10 + ", ";
+    return typeof(str) === "string" ? str.split("").reverse().join("") + ", " : false;
 }
 
 let arr = ["my", "name", "is", "Trinity"];
-console.log(stringConversion(arr, toConcatUppFirstLetter));
+console.log(stringConversion(arr, getUppFirstLetter));
 arr = ["my", 15, "is", "Trinity"];
-console.log(stringConversion(arr, toConcatUppFirstLetter));
+console.log(stringConversion(arr, getUppFirstLetter));
 
 arr = [10, 20, 30];
 console.log(stringConversion(arr, getMultiplication10));
+arr = [10, "20", 30];
+console.log(stringConversion(arr, getMultiplication10));
+arr = [10, "20str", 30];
+console.log(stringConversion(arr, getMultiplication10));
+
+let users = [{age: 45, name: "Jhon"}, {age: 20, name: "Aaron"}];
+console.log(stringConversion(users, getUserInfo));
+users = [{age: 45, secondName: "Jhon"}, {age: 20, name: "Aaron"}];
+console.log(stringConversion(users, getUserInfo));
+
+arr = ["abc", "123"];
+console.log(stringConversion(arr, getReverseString));
+arr = ["abc", 123, "123"];
+console.log(stringConversion(arr, getReverseString));
 
 // 2. Написать аналог метода every. Создайте функцию every, она должна принимать первым
 //    аргументом массив (обязательно проверьте что передан массив) вторым аргументом callback
 //    функция должна возвращать true или false в зависимости от результата вызова callback.
 //    Callback должен принимать один элемент массива, его индекс в массиве и весь массив.
 
-
+function every(arr, callback) {
+    
+    if (!Array.isArray(arr)) return false;
+    
+    let res = true;
+    
+    for (let i = 0; i < arr.length; i++) {
+        if (!callback(arr[i], i, arr)) {
+            res = false;
+            break;
+        }
+    }
+    
+    return res;
+}
 
 // ******************* Перебирающие методы ****************************************************************************
 
@@ -84,16 +125,47 @@ console.log(stringConversion(arr, getMultiplication10));
 //    каждый элемент которого будет хранить информацию о числе и его четности:
 //    [{digit: 1, odd: true}, {digit: 2, odd: false}, {digit: 3, odd: true}...]
 
+function getArrayInfo(arr) {
+    if (!Array.isArray(arr)) return false;
+    
+    return arr.map(function (value) {
+        return {
+            digit: value,
+            odd: !Boolean(value % 2)
+        };
+    });
+}
 
+console.log(getArrayInfo([1,2,3,5,8,9,10]));
 
 // 2. Проверить, содержит ли массив [12, 4, 50, 1, 0, 18, 40] элементы, равные нулю. Если да - вернуть false.
 
+function isNoZeroContained(arr) {
+    if (!Array.isArray(arr)) return 0;
+    
+    return !arr.some(function (value) {
+        return value === 0;
+    });
+}
 
+console.log(isNoZeroContained([12, 4, 50, 1, 0, 18, 40]));
+console.log(isNoZeroContained([12, 4, 50, 1, 2, 18, 40]));
+console.log(isNoZeroContained());
 
 // 3. Проверить, содержит ли массив ['yes', 'hello', 'no', 'easycode', 'what'] хотя бы одно слово длиной
 //    больше 3х букв. Если да - вернуть true
 
+function checkElementLength(arr) {
+    if (!Array.isArray(arr)) return 0;
+    
+    return arr.some(function (str) {
+        return str.length > 3;
+    });
+}
 
+console.log(checkElementLength(['yes', 'hello', 'no', 'easycode', 'what']));
+console.log(checkElementLength(['yes', 'he', 'no', 'cod', 'wtf']));
+console.log(checkElementLength());
 
 // 4. Дан массив объектов, где каждый объект содержит информацию о букве и месте её положения
 //    в строке {буква: “a”, позиция_в_предложении: 1}:
@@ -104,26 +176,75 @@ console.log(stringConversion(arr, getMultiplication10));
 // Например: [{char:"i",index: 1}, {char:"H",index:0}, {char:"!",index:2}] → “Hi!”
 // Подсказка: вначале отсортируйте массив по index, затем используйте reduce() для построения строки
 
+function compareObjects(a, b) {
+    return a.index - b.index;
+}
 
+function getString(arr) {
+    if (!Array.isArray(arr)) return 0;
+    
+    let sortedArr = arr.sort(compareObjects);
+    
+    return sortedArr.reduce(function (str, currObj) {
+        str += currObj.char;
+        return str;
+    }, "");
+}
+
+
+arr = [{char:"a",index:12}, {char:"w",index:8}, {char:"Y",index:10}, {char:"p",index:3}, {char:"p",index:2},
+        {char:"N",index:6}, {char:" ",index:5}, {char:"y",index:4}, {char:"r",index:13}, {char:"H",index:0},
+        {char:"e",index:11}, {char:"a",index:1}, {char:" ",index:9}, {char:"!",index:14}, {char:"e",index:7}];
+
+let str = getString(arr);
+console.log(`string = ${str}`);
 
 // ******************* Метод Sort *************************************************************************************
 
 // 1. Отсортируйте массив массивов так, чтобы вначале располагались наименьшие массивы
 //    (размер массива определяется его длиной): [ [14, 45], [1], ['a', 'c', 'd'] ] → [ [1], [14, 45], ['a', 'c', 'd'] ]
 
+function compareArrays(a, b) {
+    return a.length - b.length;
+}
 
+function sortArray(arr) {
+    if (!Array.isArray(arr)) return 0;
+    // for (let elem of arr) {
+    //     if (!Array.isArray(elem)) return false;
+    // }
+    
+    return arr.sort(compareArrays);
+}
+
+console.log(sortArray([[14, 45], [1], ['a', 'c', 'd'], ""]));
 
 // 2. Есть массив объектов:
 //     [
-//         {cpu: 'intel', info: {cores:2, сache: 3}},
-//         {cpu: 'intel', info: {cores:4, сache: 4}},
-//         {cpu: 'amd', info: {cores:1, сache: 1}},
-//         {cpu: 'intel', info: {cores:3, сache: 2}},
-//         {cpu: 'amd', info: {cores:4, сache: 2}}
+//         {cpu: 'intel', info: {cores:2, cache: 3}},
+//         {cpu: 'intel', info: {cores:4, cache: 4}},
+//         {cpu: 'amd', info: {cores:1, cache: 1}},
+//         {cpu: 'intel', info: {cores:3, cache: 2}},
+//         {cpu: 'amd', info: {cores:4, cache: 2}}
 //     ]
 // Отсортировать их по возрастающему количеству ядер (cores).
 
+function compareCpuObj(a, b) {
+    return a.info.cores - b.info.cores;
+}
 
+function sortObjArr(arr) {
+    if (!Array.isArray(arr)) return 0;
+    
+    return arr.sort(compareCpuObj);
+}
+arr = [{cpu: 'intel', info: {cores:2, cache: 3}},
+        {cpu: 'intel', info: {cores:5, cache: 4}},
+        {cpu: 'amd', info: {cores:1, cache: 1}},
+        {cpu: 'intel', info: {cores:3, cache: 2}},
+        {cpu: 'amd', info: {cores:4, cache: 2}}];
+
+newArr = sortObjArr(arr);
 
 // 3. Создать функцию, которая будет принимать массив продуктов и две цены. Функция должна
 //    вернуть все продукты, цена которых находится в указанном диапазоне, и сортировать от дешевых к
@@ -136,4 +257,24 @@ console.log(stringConversion(arr, getMultiplication10));
 //     ];
 //    filterCollection(products, 15, 30) → [{...price: 15}, {...price: 18.9}, {...price: 19}, {...price: 25}]
 
+function filterCollection(products, min, max) {
+    if (arguments.length < 3 || !Array.isArray(arr) || !isNumeric(min) || !isNumeric(max)) return 0;
+    
+    let filteredCollection;
+    filteredCollection = products.filter(function (item) {
+        return item.price >= min && item.price <= max;
+    }).sort(function (a, b) {
+        return a.price - b.price;
+    });
+    
+    return filteredCollection;
+}
 
+let products = [
+    {title: 'prod1', price: 5.2}, {title: 'prod2', price: 0.18},
+    {title: 'prod3', price: 15}, {title: 'prod4', price: 25},
+    {title: 'prod5', price: 18.9}, {title: 'prod6', price: 8},
+    {title: 'prod7', price: 19}, {title: 'prod8', price: 63}
+];
+
+let filtProd = filterCollection(products, 15, 30);
