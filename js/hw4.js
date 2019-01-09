@@ -29,13 +29,12 @@ function multiply() {
     if (!arguments.length) return err[0];
 
     for (let elem of arguments) {
-        if (isNumeric(elem)) {
-            if (elem === 0){
-                return 0;
-            }
-            res *= elem;
-        } else {
+        if (!isNumeric(elem)) {
             return err[1];
+        } else if (elem === 0){
+            return 0;
+        } else {
+            res *= elem;
         }
     }
     
