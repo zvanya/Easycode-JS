@@ -36,6 +36,15 @@ function multiply() {
         } else {
             res *= elem;
         }
+        
+        // либо еще вариант (мне больше нравится):
+        // if (isNumeric(elem) && elem !== 0) {
+        //     res *= elem;
+        // } else if (!isNumeric(elem)){
+        //     return err[1];
+        // } else {
+        //     return 0;
+        // }
     }
     
     return res;
