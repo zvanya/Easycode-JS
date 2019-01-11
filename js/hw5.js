@@ -119,10 +119,18 @@ function every(arr, callback) {
     return res;
 }
 
+function isGreater5(number) {
+    return number > 5;
+}
+
 function isPositive(number) {
     return number > 0;
 }
 
+arr = [7, 12, 8, 32, 13];
+console.log(`res = ${every(arr, isGreater5)}`);
+arr = [11, 2, 13, 4, -3];
+console.log(`res = ${every(arr, isGreater5)}`);
 arr = [1, 12, 2, 32, 3];
 console.log(`res = ${every(arr, isPositive)}`);
 arr = [1, 12, 2, 32, -3];
