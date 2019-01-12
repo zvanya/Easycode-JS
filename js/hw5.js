@@ -1,7 +1,7 @@
 // Helper functions
 // https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/isarray#Polyfill
 if (typeof Array.isArray === 'undefined') {
-    Array.isArray = function(obj) {
+    Array.isArray = function (obj) {
         return Object.prototype.toString.call(obj) === '[object Array]';
     }
 }
@@ -9,6 +9,7 @@ if (typeof Array.isArray === 'undefined') {
 function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
+
 // Helper functions end
 
 // ******************* Функции высшего порядка ************************************************************************
@@ -27,7 +28,7 @@ function isNumeric(n) {
 // один аргумент (каждый элемент массива) и возвращает результат его обработки
 
 function stringConversion(arr, callback) {
-
+    
     let str = "New value: ";
     
     if (!Array.isArray(arr)) return false;
@@ -40,19 +41,19 @@ function stringConversion(arr, callback) {
         str += newValue;
     }
     
-    if (str.slice(-2) === ", ") return str.substring(0, str.length-2);
+    if (str.slice(-2) === ", ") return str.substring(0, str.length - 2);
     
     return str;
 }
 
 function getUppFirstLetter(str) {
     
-    if (typeof(str) !== "string") return false;
+    if (typeof (str) !== "string") return false;
     
     let newStr = str[0].toUpperCase();
-
+    
     for (let i = 1; i < str.length; i++) {
-         newStr += str[i];
+        newStr += str[i];
     }
     
     return newStr;
@@ -64,8 +65,8 @@ function getMultiplication10(value) {
 }
 
 function getUserInfo(user) {
-
-    if ("name" in user && "age" in user && typeof(user.name) === "string" && isNumeric(user.age))
+    
+    if ("name" in user && "age" in user && typeof (user.name) === "string" && isNumeric(user.age))
         return user.name + " is " + user.age + ", ";
     else
         return false;
@@ -73,7 +74,7 @@ function getUserInfo(user) {
 
 function getReverseString(str) {
     
-    return typeof(str) === "string" ? str.split("").reverse().join("") + ", " : false;
+    return typeof (str) === "string" ? str.split("").reverse().join("") + ", " : false;
 }
 
 let arr = ["my", "name", "is", "Trinity"];
@@ -153,7 +154,7 @@ function getArrayInfo(arr) {
     });
 }
 
-console.log(getArrayInfo([1,2,3,5,8,9,10]));
+console.log(getArrayInfo([1, 2, 3, 5, 8, 9, 10]));
 
 // 2. Проверить, содержит ли массив [12, 4, 50, 1, 0, 18, 40] элементы, равные нулю. Если да - вернуть false.
 
@@ -209,9 +210,9 @@ function getString(arr) {
 }
 
 
-arr = [{char:"a",index:12}, {char:"w",index:8}, {char:"Y",index:10}, {char:"p",index:3}, {char:"p",index:2},
-        {char:"N",index:6}, {char:" ",index:5}, {char:"y",index:4}, {char:"r",index:13}, {char:"H",index:0},
-        {char:"e",index:11}, {char:"a",index:1}, {char:" ",index:9}, {char:"!",index:14}, {char:"e",index:7}];
+arr = [{char: "a", index: 12}, {char: "w", index: 8}, {char: "Y", index: 10}, {char: "p", index: 3}, {char: "p", index: 2},
+    {char: "N", index: 6}, {char: " ", index: 5}, {char: "y", index: 4}, {char: "r", index: 13}, {char: "H", index: 0},
+    {char: "e", index: 11}, {char: "a", index: 1}, {char: " ", index: 9}, {char: "!", index: 14}, {char: "e", index: 7}];
 
 let str = getString(arr);
 console.log(`string = ${str}`);
@@ -255,11 +256,12 @@ function sortObjArr(arr) {
     
     return arr.sort(compareCpuObj);
 }
-arr = [{cpu: 'intel', info: {cores:2, cache: 3}},
-        {cpu: 'intel', info: {cores:5, cache: 4}},
-        {cpu: 'amd', info: {cores:1, cache: 1}},
-        {cpu: 'intel', info: {cores:3, cache: 2}},
-        {cpu: 'amd', info: {cores:4, cache: 2}}];
+
+arr = [{cpu: 'intel', info: {cores: 2, cache: 3}},
+    {cpu: 'intel', info: {cores: 5, cache: 4}},
+    {cpu: 'amd', info: {cores: 1, cache: 1}},
+    {cpu: 'intel', info: {cores: 3, cache: 2}},
+    {cpu: 'amd', info: {cores: 4, cache: 2}}];
 
 newArr = sortObjArr(arr);
 
