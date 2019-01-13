@@ -149,7 +149,7 @@ function getArrayInfo(arr) {
     return arr.map(function (value) {
         return {
             digit: value,
-            odd: !Boolean(value % 2)
+            odd: !!(value % 2)
         };
     });
 }
