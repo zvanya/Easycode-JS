@@ -77,13 +77,19 @@ const deleteTodoItem = (id) => {
  */
 const editTodoItem = (id, title, text) => {
     if (!!!todosStorage.currentTodos.filter((todoItem) => todoItem.id === id).length) return false; // В списке нет задачи с таким id
+
+    // Вариант 1
+    let index = todosStorage.currentTodos.findIndex((elem, index) => {if (elem.id === id) return index; });
+    if (title) todosStorage.currentTodos[index].title = title;
+    if (text) todosStorage.currentTodos[index].text = text;
     
-    todosStorage.currentTodos.forEach((item) => {
-        if (item.id === id) {
-            if (title) item.title = title;
-            if (text) item.text = text;
-        }
-    });
+    // Вариант 2. Недостаток: переберет весь массив, даже если уже нашел нужный элемент и изменил его
+    // todosStorage.currentTodos.forEach((item) => {
+    //     if (item.id === id) {
+    //         if (title) item.title = title;
+    //         if (text) item.text = text;
+    //     }
+    // });
     
     return true;
 };
