@@ -51,22 +51,12 @@ const getTextFromUl = (ul) => {
 // 4. В параграфе заменить все дочерние текстовые узлы на “-text-”
 //    (вложенные теги должны остаться). Конечный результат:
 //    -text-<a href="#">reprehendunt</a>-text-<mark>nemore</mark>-text-
-/**
- *
- * @param {element} pNode
- * @returns {string}
- */
-const pNodeChange = (pNode) => {
-    if (!pNode) return false;
 
-    // let pNode = body.querySelector("div article p");
+let pNode = document.body.querySelector("div article p");
 
-    let pNodeList = Array.prototype.slice.call(pNode.childNodes);
+let newP = "";
+Array.prototype.slice.call(pNode.childNodes).forEach((node) => {
+    newP += node.nodeType === 3 ? "-text-" : node.outerHTML;
+});
 
-    let newP = "";
-    pNodeList.forEach((node) => {
-        newP += node.nodeType === 3 ? "-text-" : node.outerHTML;
-    });
-
-    return newP;
-};
+pNode.innerHTML = newP;
