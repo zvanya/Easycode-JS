@@ -76,7 +76,7 @@ const deleteTodoItem = (id) => {
  * @returns {boolean}
  */
 const editTodoItem = (id, title, text) => {
-    if (!!!todosStorage.currentTodos.filter((todoItem) => todoItem.id === id).length) return false; // В списке нет задачи с таким id
+    if (!id || !!!todosStorage.currentTodos.filter((todoItem) => todoItem.id === id).length) return false;
 
     // Вариант 1
     let index = todosStorage.currentTodos.findIndex((elem, index) => {if (elem.id === id) return index; });
