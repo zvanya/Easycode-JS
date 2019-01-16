@@ -50,13 +50,15 @@ function getUppFirstLetter(str) {
     
     if (typeof (str) !== "string") return false;
     
-    let newStr = str[0].toUpperCase();
+    // let newStr = str[0].toUpperCase();
+    //
+    // for (let i = 1; i < str.length; i++) {
+    //     newStr += str[i];
+    // }
+    //
+    // return newStr;
     
-    for (let i = 1; i < str.length; i++) {
-        newStr += str[i];
-    }
-    
-    return newStr;
+    return str[0].toUpperCase() + str.slice(1);
 }
 
 function getMultiplication10(value) {
@@ -204,8 +206,10 @@ function getString(arr) {
     let sortedArr = arr.sort(compareObjects);
     
     return sortedArr.reduce(function (str, currObj) {
-        str += currObj.char;
-        return str;
+        // str += currObj.char;
+        // return str;
+        
+        return str + currObj.char;
     }, "");
 }
 
