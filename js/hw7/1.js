@@ -48,6 +48,9 @@ const getTextFromUl = (ul) => {
     return aList.map((a) => {return a.textContent});
 };
 
+let ul = document.body.querySelector("ul");
+let aList = getTextFromUl(ul);
+
 // 4. В параграфе заменить все дочерние текстовые узлы на “-text-”
 //    (вложенные теги должны остаться). Конечный результат:
 //    -text-<a href="#">reprehendunt</a>-text-<mark>nemore</mark>-text-
