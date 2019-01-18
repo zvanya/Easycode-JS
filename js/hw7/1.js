@@ -55,10 +55,12 @@ let aList = getTextFromUl(ul);
 //    (вложенные теги должны остаться). Конечный результат:
 //    -text-<a href="#">reprehendunt</a>-text-<mark>nemore</mark>-text-
 
+// https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach
+
 let pNode = document.body.querySelector("div article p");
 
 let newP = "";
-Array.prototype.slice.call(pNode.childNodes).forEach((node) => {
+pNode.childNodes.forEach((node) => {
     newP += node.nodeType === 3 ? "-text-" : node.outerHTML;
 });
 

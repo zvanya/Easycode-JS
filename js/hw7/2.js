@@ -10,7 +10,7 @@ body.querySelector("ul ~ a").id = "link";
 
 // 3. На li через один (начиная с самого первого) установить класс “item”
 
-Array.prototype.slice.call(body.querySelectorAll("ul li")).forEach((li, i) => {
+body.querySelectorAll("ul li").forEach((li, i) => {
     if (!!!(i%2)) {
         li.classList.add("item");
     }
