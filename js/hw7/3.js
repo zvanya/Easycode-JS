@@ -39,7 +39,8 @@ let myImg = document.createElement("img");
 myImg.src = "http://placekitten.com/g/200/300";
 myImg.alt = "эти милые котейки";
 
-document.body.insertBefore(myImg, document.body.firstChild);
+//document.body.insertBefore(myImg, document.body.firstChild);
+document.body.prepend(myImg);
 
 // 4. Найти на странице элемент mark, добавить в конец содержимого текст “green” и на элемент
 //    установить класс green
@@ -47,7 +48,8 @@ document.body.insertBefore(myImg, document.body.firstChild);
 let mark = document.body.querySelector("mark");
 mark.classList.add("green");
 // mark.textContent += "green"; // так делать некорректно, потому как перезатрется html разметка (если она есть)
-mark.appendChild(document.createTextNode("green"));
+//mark.appendChild(document.createTextNode("green"));
+mark.append("green");
 
 // 5. Отсортировать li внутри списка в обратном порядке (по тексту внутри)
 
