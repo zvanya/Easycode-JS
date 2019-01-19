@@ -26,10 +26,17 @@ arrLi.forEach((li) => {
 //    каждую ссылку один - strong).
 
 let liA = document.body.querySelectorAll("li a");
+
+//если, как было в первоначальном задании, то решение такое:
 liA.forEach((a) => {
     let strong = document.createElement("strong");
     strong.textContent = " strong";
     a.appendChild(strong);
+});
+
+//если надо было текст лишек поместить внутрь тега strong, то решение такое:
+liA.forEach((a) => {
+    a.innerHTML = `<strong>${a.textContent}</strong>`;
 });
 
 // 3. В начало документа (в начало body) добавить картинку img с атрибутами src и alt (текст придумайте
