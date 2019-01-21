@@ -8,17 +8,17 @@
 // 2. удалить задачу
 //      а. подтверждение
 //      б. удаление данных из таблицы
-//      в. удаление данных из массива
-// 3. редактировать задачу
+//      в. удаление данных из массива 
+// 3. редактировать задачу 
 //      а. взять данные из массива
-//      б. поместить в форму
+//      б. поместить в форму 
 //      в. обработать форму на редактирование
 //          - валидация
 //      г. обновить данные в массиве
 //      д. обновить данные в таблице
 //      е. очистить форму
 
-
+    
 const todosStorage = {
     todos: []
 };
@@ -29,22 +29,20 @@ const form = document.forms['addTodoForm'];
 const table = document.querySelector('.table tbody');
 const title = form.elements['title'];
 const text = form.elements['text'];
-const btnPrimary = form.querySelector(".btn-primary");
 
 // event handling
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    
+
     if (!title.value || !text.value) return alertMessage('alert-danger', 'Введите title и text');
-    
-    if (form.hasAttribute("data-task-id")) {
-        editTodoItem(form.dataset.taskId, title.value, text.value);
-        formReset();
-    } else {
-        addNewTodoToStorage(title.value, text.value);
-        alertMessage('alert-info', 'Задача добавлена успешно');
-        form.reset();
-    }
+
+    // если есть аттр data-task-id
+    // вызываем функцию editTaskStorage
+    // очистка формы и удалить аттр data-task-id
+
+    addNewTodoToStorage(title.value, text.value);
+    alertMessage('alert-info', 'Задача добавлена успешно');
+    form.reset();
 });
 
 table.addEventListener('click', (e) => {
@@ -54,26 +52,26 @@ table.addEventListener('click', (e) => {
         alertMessage('alert-info', 'Задача удалена успешно');
         return;
     }
-    
+
     if (e.target.classList.contains('edit-todo')) {
         const id = e.target.closest('[data-id]').dataset.id;
-        setFormToEdit(id);
+        setFormtoEdit(id);
     }
 });
 
 
 // alert messages
 /**
- *
- * @param {String} className
- * @param {String} message
+ * 
+ * @param {String} className 
+ * @param {String} message 
  */
 function alertMessage(className, message) {
     removeAlert();
-    
+
     const template = alertTemplate(className, message);
     formCol.insertAdjacentHTML('afterbegin', template);
-    
+
     setTimeout(removeAlert, 2000);
 }
 
@@ -82,96 +80,96 @@ function removeAlert() {
     if (currentAlert) formCol.removeChild(currentAlert);
 }
 
-
+   
 /**
- * generateId - создает произвольную строку
- * @returns {string} - новый id
- */
-const generateId = () => {
+* generateId - создает произвольную строку 
+* @returns {string} - новый id
+*/
+function generateId() {
     const uniqueValues = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
-    return "ssssssssss".replace(/s/g, () => uniqueValues[Math.floor(Math.random() * uniqueValues.length)]);
-};
+    let id = '';
+
+    for (let char of uniqueValues) {
+        let index = Math.floor(Math.random() * uniqueValues.length);
+        id += uniqueValues[index];
+    }
+ 
+    return id;
+ }
+
 
 /**
- * addNewTodoToStorage - добавляет новый todo в storage а потом в view
- * @param {String} title
- * @param {String} text
- * @returns {[]} currentTodos
- */
+* addNewTodoToStorage - добавляет новый todo в storage а потом в view
+* @param {String} title 
+* @param {String} text
+* @returns {[]} currentTodos
+*/
 function addNewTodoToStorage(title, text) {
     if (!title) return console.log('Please provide todo title');
     if (!text) return console.log('Please provide todo text');
-    
+ 
     const newTodo = {title, text, id: generateId()}
     todosStorage.todos.push(newTodo);
-    
+
     // Добавим в разметку
     addNewTodoToView(newTodo);
-    
-    return todosStorage.todos;
-}
 
-/**
- *
- * @param {String} id
- * @returns {[]} currentTodos
- */
+    return todosStorage.todos;
+ }
+
+ /**
+* 
+* @param {String} id 
+* @returns {[]} currentTodos
+*/
 function deleteTodoFromStorage(id) {
     const checkIdRes = checkId(id);
     if (checkIdRes.error) return console.log(checkIdRes.msg);
     
     let removedTask;
-    
+
     for (let i = 0; i < todosStorage.todos.length; i++) {
         if (todosStorage.todos[i].id === id) {
             removedTask = todosStorage.todos.splice(i, 1);
             break;
         }
     }
-    
+
     // удаляем с разметки
     deleteTodoFromView(id);
     
     return removedTask;
-}
+ }
 
 
 /**
- *
- * @param {String} id
+ * 
+ * @param {String} id 
  */
 function checkId(id) {
     if (!id) return { error: true, msg: 'Передайте id удаляемой задачи.' };
-    
+
     const idIsPresent = todosStorage.todos.some((todo) => todo.id === id );
     if (!idIsPresent) return { error: true, msg: 'Задачи с таким id несуществуе' };
-    
+
     return { error: false, msg: '' };
 }
 
 
 // View functions
 
-function formReset() {
-    form.reset();
-    form.removeAttribute("data-task-id");
-    btnPrimary.textContent = "Add task";
-}
-
 /**
- *
- * @param {String} id
+ * 
+ * @param {String} id 
  */
 function deleteTodoFromView(id) {
     const target = document.querySelector(`[data-id="${id}"]`);
     target.parentElement.removeChild(target);
-    
-    formReset();
 }
 
 /**
- *
- * @param {*} task
+ * 
+ * @param {*} task 
  */
 function addNewTodoToView(todo) {
     const template = todoTemplate(todo);
@@ -179,7 +177,7 @@ function addNewTodoToView(todo) {
 }
 
 /**
- *
+ * 
  * @param {*} todo
  * todo {
  *  id: string;
@@ -189,7 +187,7 @@ function addNewTodoToView(todo) {
  */
 function todoTemplate(todo) {
     return `
-        <tr data-id="${todo.id}">
+        <tr data-id="${todo.id}"> 
             <td>${todo.title}</td>
             <td>${todo.text}</td>
             <td>
@@ -201,9 +199,9 @@ function todoTemplate(todo) {
 }
 
 /**
- *
- * @param {String} className
- * @param {String} message
+ * 
+ * @param {String} className 
+ * @param {String} message 
  */
 function alertTemplate(className, message) {
     return `
@@ -211,67 +209,25 @@ function alertTemplate(className, message) {
     `;
 }
 
-function editTodoInView(id, title, text) {
-    const checkIdRes = checkId(id);
-    if (checkIdRes.error) return console.log(checkIdRes.msg);
-    
-    let tr = document.querySelector(`[data-id="${id}"]`);
-    let td = tr.querySelectorAll("td");
-    
-    // debugger;
-    
-    td[0].innerHTML = title;
-    td[1].innerHTML = text;
-}
-
 addNewTodoToStorage('My title 1', 'My text 1');
-addNewTodoToStorage('My title 2', 'My text 2');
-addNewTodoToStorage('My title 3', 'My text 3');
 
 
 // Make editing work
 
 /**
- * editTodoItem - Изменяет поля title и text todoItem с id равным id
- * @param {String} id
- * @param {String} title
- * @param {String} text
- * @returns {boolean}
+ * 
+ * @param {String} id 
+ * @param {String} title 
+ * @param {String} text 
  */
-function editTodoItem(id, title, text) {
-    const checkIdRes = checkId(id);
-    if (checkIdRes.error) return console.log(checkIdRes.msg);
-    
-    for (let i = 0; i < todosStorage.todos.length ; i++) {
-        if (todosStorage.todos[i].id === id) {
-            todosStorage.todos[i].title = title;
-            todosStorage.todos[i].text = text;
-            break;
-        }
-    }
-    
-    editTodoInView(id, title, text);
-    
-    return true;
+function editTaskStorage(id, title, text) {
+    // editTaskView
 }
 
-function setFormToEdit(id) {
+
+function setFormtoEdit(id) {
     // 1. найти нужную задачу в нашем storage
     // 2. в поле title и text записываем значение title, text с todo котору мы получили из strogae
     // добавить форме атр data-task-id=id;
     // получить доступ к submit кнопке и перезаписать ее на save
-    
-    const checkIdRes = checkId(id);
-    if (checkIdRes.error) return console.log(checkIdRes.msg);
-    
-    for (let i = 0; i < todosStorage.todos.length; i++) {
-        if (todosStorage.todos[i].id === id) {
-            title.value = todosStorage.todos[i].title;
-            text.value = todosStorage.todos[i].text;
-            form.dataset.taskId = id;
-            btnPrimary.textContent = "Save";
-        }
-    }
 }
-
-
