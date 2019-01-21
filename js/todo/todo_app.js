@@ -39,6 +39,7 @@ form.addEventListener('submit', (e) => {
     
     if (form.hasAttribute("data-task-id")) {
         editTodoItem(form.dataset.taskId, title.value, text.value);
+        alertMessage('alert-info', 'Задача обновлена успешно');
         formReset();
     } else {
         addNewTodoToStorage(title.value, text.value);
