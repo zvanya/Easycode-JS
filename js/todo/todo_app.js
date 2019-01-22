@@ -18,10 +18,11 @@
 //      д. обновить данные в таблице
 //      е. очистить форму
 
-
 const todosStorage = {
     todos: []
 };
+
+const editMode = {isEdit: false, todoId: null};
 
 // UI Elements
 const formCol = document.querySelector('.form-col');
@@ -37,8 +38,8 @@ form.addEventListener('submit', (e) => {
     
     if (!title.value || !text.value) return alertMessage('alert-danger', 'Введите title и text');
     
-    if (form.hasAttribute("data-task-id")) {
-        editTodoItem(form.dataset.taskId, title.value, text.value);
+    if (editMode.isEdit && editMode.todoId !== null) {
+        editTodoItem(editMode.todoId, title.value, text.value);
         alertMessage('alert-info', 'Задача обновлена успешно');
         formReset();
     } else {
@@ -57,8 +58,9 @@ table.addEventListener('click', (e) => {
     }
     
     if (e.target.classList.contains('edit-todo')) {
-        const id = e.target.closest('[data-id]').dataset.id;
-        setFormToEdit(id);
+        editMode.isEdit = true;
+        editMode.todoId = e.target.closest('[data-id]').dataset.id;
+        setFormToEdit(editMode.todoId);
     }
 });
 
@@ -155,7 +157,8 @@ function checkId(id) {
 
 function formReset() {
     form.reset();
-    form.removeAttribute("data-task-id");
+    editMode.isEdit = false;
+    editMode.todoId = null;
     btnPrimary.textContent = "Add task";
 }
 
@@ -259,7 +262,6 @@ function editTodoItem(id, title, text) {
 function setFormToEdit(id) {
     // 1. найти нужную задачу в нашем storage
     // 2. в поле title и text записываем значение title, text с todo котору мы получили из strogae
-    // добавить форме атр data-task-id=id;
     // получить доступ к submit кнопке и перезаписать ее на save
     
     const checkIdRes = checkId(id);
@@ -269,7 +271,6 @@ function setFormToEdit(id) {
         if (todosStorage.todos[i].id === id) {
             title.value = todosStorage.todos[i].title;
             text.value = todosStorage.todos[i].text;
-            form.dataset.taskId = id;
             btnPrimary.textContent = "Save";
         }
     }
