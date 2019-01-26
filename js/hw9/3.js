@@ -9,12 +9,18 @@
 //        other: [‘b’, ‘c’, ‘d’]
 //    }
 
-function f(first, ...rest) {
-    return {first, rest};
+function parseArrayToObj (...rest) {
+    const [first, ...other] = rest;
+    return {first, other};
 }
 
-let obj = f('a', 'b', 'c', 'd');
-let {first: fst, rest: r} = f('a', 'b', 'c', 'd'); //fst === "a", r === ['b', 'c', 'd']
+function parseArrayToObj_v2 (...rest) {
+    const [first] = rest;
+    return {first, other: rest.slice(1)};
+}
+
+let obj = parseArrayToObj('a', 'b', 'c', 'd');
+let {first: fst, other: r} = parseArrayToObj_v2('a', 'b', 'c', 'd'); //fst === "a", r === ['b', 'c', 'd']
 
 // 2. Организовать функцию getInfo, которая принимает объект вида
 //    { name: ..., info: { employees: ..., partners: [ … ] } }
