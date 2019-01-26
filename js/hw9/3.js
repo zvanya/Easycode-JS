@@ -34,14 +34,19 @@ let {first: fst, other: r} = parseArrayToObj_v2('a', 'b', 'c', 'd'); //fst === "
 //    Name: Google
 //    Partners: Microsoft Facebook
 
-function getInfo({name, info: {employees, partners}}) {
-    console.log(`Name: ${!name ? "Unknown" : name}`);
+function getInfo({name = "Unknown", info: {employees, partners}}) {
+    // console.log(`Name: ${!name ? "Unknown" : name}`);
+    console.log(`Name: ${name}`);
     console.log(`Partners: ${partners[0]}, ${partners[1]}`);
 }
 
-const organisation = {
+let organisation = {
     name: 'Google',
     info: { employees: 1536, partners: ['Microsoft', 'Facebook', 'Xing'] }
 };
+getInfo(organisation);
 
+organisation = {
+    info: { employees: 1536, partners: ['Microsoft', 'Facebook', 'Xing'] }
+};
 getInfo(organisation);
