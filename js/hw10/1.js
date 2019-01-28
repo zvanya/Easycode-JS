@@ -126,6 +126,13 @@ const calc = (function() {
         _value /= value;
         return this;
     }
+
+    function pow(value) {
+        if (arguments.length > 0) _value = !isNumeric(value) ? 0 : value;
+        else console.log(`Задайте аргумент ф-ции ${arguments.callee.toString().match(/function ([^(]*)\(/)[1]}.`);
+        _value = Math.pow(_value, value);
+        return this;
+    }
     
     return {
         setValue: setValue,
@@ -133,6 +140,7 @@ const calc = (function() {
         plus: plus,
         minus: minus,
         multiply: multiply,
-        divide: divide
+        divide: divide,
+        pow: pow
     }
 }());
