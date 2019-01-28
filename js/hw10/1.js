@@ -13,16 +13,16 @@ function isNumeric(n) {
 //    minus()(6); // -6
 //    minus()(); // 0
 
-function minus(x) {
-    if (!isNumeric(x)) x = 0;
-    
-    return (y) => x - (!isNumeric(y) ? 0 : y);
-    
-    // return function(y) {
-    //     if (!isNumeric(y)) y = 0;
-    //     return x - y;
-    // }
+// Вариант 1
+function minus(x = 0) {
+    return (y = 0) => x - y;
 }
+
+// Вариант 2. Более универсальный.
+// function minus(x) {
+//     if (!isNumeric(x)) x = 0;
+//     return (y) => x - (!isNumeric(y) ? 0 : y);
+// }
 
 // 2. Реализовать функцию, которая умножает и умеет запоминать
 //    возвращаемый результат между вызовами:
@@ -34,8 +34,8 @@ function minus(x) {
 //     multiply(10); // 120 (12 * 10)
 
 function multiplyMaker(x) {
-    let res = !isNumeric(x) ? 0 : x;
-    return (y) => res *= !isNumeric(y) ? 0 : y;
+    x = !isNumeric(x) ? 0 : x;
+    return (y) => x *= !isNumeric(y) ? 0 : y;
 }
 
 
@@ -88,7 +88,10 @@ const calc = (function() {
     let _value;
     
     function setValue(value) {
-        if (arguments.length > 0) _value = !isNumeric(value) ? 0 : value;
+        if (arguments.length > 0) {
+            _value = !isNumeric(value) ? 0 : value;
+            return  this;
+        }
         else console.log(`Задайте аргумент ф-ции ${arguments.callee.toString().match(/function ([^(]*)\(/)[1]}.`);
     }
     
