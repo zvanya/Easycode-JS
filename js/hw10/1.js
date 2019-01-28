@@ -85,8 +85,6 @@ const line = (function() {
 //     модуль.установитьЗначение(10).вСтепень(2).узнатьЗначение(); // 100
 
 const calc = (function() {
-    //TODO: добавить проверки входных данных
-    
     let _value;
     
     function setValue(value) {
