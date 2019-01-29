@@ -88,11 +88,12 @@ const calc = (function() {
     let _value;
     
     function setValue(value) {
-        if (arguments.length > 0) {
-            _value = !isNumeric(value) ? 0 : value;
-            return  this;
+        if (!value || !isNumeric(value)) {
+            console.log(`Задайте корректный аргумент ф-ции ${arguments.callee.toString().match(/function ([^(]*)\(/)[1]}.`);
+        } else {
+            _value = value;
         }
-        else console.log(`Задайте аргумент ф-ции ${arguments.callee.toString().match(/function ([^(]*)\(/)[1]}.`);
+        return this;
     }
     
     function getValue() {
@@ -100,37 +101,47 @@ const calc = (function() {
     }
 
     function plus(value) {
-        if (arguments.length > 0) _value = !isNumeric(value) ? 0 : value;
-        else console.log(`Задайте аргумент ф-ции ${arguments.callee.toString().match(/function ([^(]*)\(/)[1]}.`);
-        _value += value;
+        if (!value || !isNumeric(value)) {
+            console.log(`Задайте корректный аргумент ф-ции ${arguments.callee.toString().match(/function ([^(]*)\(/)[1]}.`);
+        } else {
+            _value += value;
+        }
         return this;
     }
     
     function minus(value) {
-        if (arguments.length > 0) _value = !isNumeric(value) ? 0 : value;
-        else console.log(`Задайте аргумент ф-ции ${arguments.callee.toString().match(/function ([^(]*)\(/)[1]}.`);
-        _value -= value;
+        if (!value || !isNumeric(value)) {
+            console.log(`Задайте корректный аргумент ф-ции ${arguments.callee.toString().match(/function ([^(]*)\(/)[1]}.`);
+        } else {
+            _value -= value;
+        }
         return this;
     }
     
     function multiply(value) {
-        if (arguments.length > 0) _value = !isNumeric(value) ? 0 : value;
-        else console.log(`Задайте аргумент ф-ции ${arguments.callee.toString().match(/function ([^(]*)\(/)[1]}.`);
-        _value *= value;
+        if (!value || !isNumeric(value)) {
+            console.log(`Задайте корректный аргумент ф-ции ${arguments.callee.toString().match(/function ([^(]*)\(/)[1]}.`);
+        } else {
+            _value *= value;
+        }
         return this;
     }
     
     function divide(value) {
-        if (arguments.length > 0) _value = !isNumeric(value) ? 0 : value;
-        else console.log(`Задайте аргумент ф-ции ${arguments.callee.toString().match(/function ([^(]*)\(/)[1]}.`);
-        _value /= value;
+        if (!value || !isNumeric(value)) {
+            console.log(`Задайте корректный аргумент ф-ции ${arguments.callee.toString().match(/function ([^(]*)\(/)[1]}.`);
+        } else {
+            _value /= value;
+        }
         return this;
     }
 
     function pow(value) {
-        if (arguments.length > 0) _value = !isNumeric(value) ? 0 : value;
-        else console.log(`Задайте аргумент ф-ции ${arguments.callee.toString().match(/function ([^(]*)\(/)[1]}.`);
-        _value = Math.pow(_value, value);
+        if (!value || !isNumeric(value)) {
+            console.log(`Задайте корректный аргумент ф-ции ${arguments.callee.toString().match(/function ([^(]*)\(/)[1]}.`);
+        } else {
+            _value = Math.pow(_value, value);
+        }
         return this;
     }
     
