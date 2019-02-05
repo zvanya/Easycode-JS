@@ -45,41 +45,40 @@ listTab.addEventListener("click", (e) => {
     
     const user = users.filter((user) => user.id === +id);
     
-    // console.log(user[0]);
-    
-    tabPane.innerHTML = `
-        <ul>
-            <li>name: ${user[0].name}</li>
-            <li>username: ${user[0].username}</li>
-            <li>email: ${user[0].email}</li>
-            <li>
-                <b>address</b>
-                <ul>
-                    <li>street: ${user[0].address.street}</li>
-                    <li>suite: ${user[0].address.suite}</li>
-                    <li>city: ${user[0].address.city}</li>
-                    <li>zipcode: ${user[0].address.zipcode}</li>
-                    <li><b>geo</b></li>
+    if (!user.length) {
+        tabPane.innerHTML = "";
+    } else {
+        tabPane.innerHTML = `
+            <ul>
+                <li>name: ${user[0].name}</li>
+                <li>username: ${user[0].username}</li>
+                <li>email: ${user[0].email}</li>
+                <li>
+                    <b>address</b>
                     <ul>
-                        <li>lat: ${user[0].address.geo.lat}</li>
-                        <li>lng: ${user[0].address.geo.lng}</li>
+                        <li>street: ${user[0].address.street}</li>
+                        <li>suite: ${user[0].address.suite}</li>
+                        <li>city: ${user[0].address.city}</li>
+                        <li>zipcode: ${user[0].address.zipcode}</li>
+                        <li><b>geo</b></li>
+                        <ul>
+                            <li>lat: ${user[0].address.geo.lat}</li>
+                            <li>lng: ${user[0].address.geo.lng}</li>
+                        </ul>
                     </ul>
-                </ul>
-            </li>
-            <li>phone: ${user[0].phone}</li>
-            <li>website: ${user[0].website}</li>
-            <li>
-                <b>company</b>
-                <ul>
-                    <li>name: ${user[0].company.name}</li>
-                    <li>catchPhrase: ${user[0].company.catchPhrase}</li>
-                    <li>bs: ${user[0].company.bs}</li>
-                </ul>
-            </li>
-        </ul>
-
-
-    `;
-    
+                </li>
+                <li>phone: ${user[0].phone}</li>
+                <li>website: ${user[0].website}</li>
+                <li>
+                    <b>company</b>
+                    <ul>
+                        <li>name: ${user[0].company.name}</li>
+                        <li>catchPhrase: ${user[0].company.catchPhrase}</li>
+                        <li>bs: ${user[0].company.bs}</li>
+                    </ul>
+                </li>
+            </ul>
+        `;
+    }
 });
 
