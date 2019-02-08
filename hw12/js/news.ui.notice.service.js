@@ -1,4 +1,4 @@
-class NewsUiNotice {
+class NewsUINotice {
     /**
      *
      * @param {String} containerClass
@@ -24,8 +24,8 @@ class NewsUiNotice {
      */
     generateNotice(bgColorClassName = "yellow", foreColorClassName = "black", message = "По Вашему запросу ничего не найдено") {
         this.removeNotice();
-    
-        const templateNotice = this.noticeTemplate(bgColorClassName, foreColorClassName, message);
+        
+        const templateNotice = NewsUINotice.noticeTemplate(bgColorClassName, foreColorClassName, message);
     
         this.noticeContainer.insertAdjacentHTML("afterbegin", templateNotice);
     

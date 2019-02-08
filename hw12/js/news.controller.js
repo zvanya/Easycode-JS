@@ -1,13 +1,12 @@
 const newsService = new NewsService();
 const uiService = new NewsUI();
-const queryResultNotice = new NewsUiNotice("notice-query-result");
+const queryResultNotice = new NewsUINotice("notice-query-result");
 
 // UI Elements
 const form = document.forms['newsControlForm'];
 const countrySelect = form['country'];
 const categorySelect = form['category'];
 const queryFilter = form['search'];
-const queryResult = document.querySelector(".notice-query-result");
 
 function onSelectChange(event) {
     const country = countrySelect.value;
@@ -23,7 +22,7 @@ function onSelectChange(event) {
         // console.timeEnd();
 
         // console.time();
-        articles.forEach((article) => uiService.addArticle(article));
+        articles.forEach((article) => uiService.addArticleHTML(article));
         // console.timeEnd();
     });
 }
@@ -45,11 +44,11 @@ function onFilterChange(event) {
         
         if (totalResults === 0) {
             uiService.clearContainer();
-            queryResultNotice.generateNotice();
+            queryResultNotice.generateNotice("orange");
         } else {
             queryResultNotice.removeNotice();
             uiService.clearContainer();
-            articles.forEach((article) => uiService.addArticle(article));
+            articles.forEach((article) => uiService.addArticleElement(article));
         }
     });
 }
