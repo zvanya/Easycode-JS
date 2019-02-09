@@ -36,21 +36,21 @@ function onFilterChange(event) {
     
     if (!query || query.length < 3) {
         uiService.clearContainer();
-        return console.error('Введите строку поиска более 3х символов');
-    }
+        queryResultNotice.generateNotice("green", "black", "Введите запрос более 2х символов");
+    } else {
+        newsService.getQueryFilteredNews(query, (response) => {
+            const {totalResults, articles} = response;
     
-    newsService.getQueryFilteredNews(query, (response) => {
-        const { totalResults, articles } = response;
-        
-        if (totalResults === 0) {
             uiService.clearContainer();
-            queryResultNotice.generateNotice("orange");
-        } else {
-            queryResultNotice.removeNotice();
-            uiService.clearContainer();
-            articles.forEach((article) => uiService.addArticleElement(article));
-        }
-    });
+
+            if (totalResults === 0) {
+                queryResultNotice.generateNotice("orange");
+            } else {
+                queryResultNotice.removeNotice();
+                articles.forEach((article) => uiService.addArticleElement(article));
+            }
+        });
+    }
 }
 
 countrySelect.addEventListener('change', onSelectChange);

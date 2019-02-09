@@ -4,7 +4,7 @@ class ENV {
     }
 
     static get apiKey() {
-        return '86979058ddc94182861ddfdfda022761';
+        return 'fe325cc930ea4be3bc3b9110f5531ca2';
     }
 
     static get country() {
