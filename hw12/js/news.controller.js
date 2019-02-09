@@ -34,10 +34,15 @@ function onSelectChange(event) {
 function onFilterChange(event) {
     const query = queryFilter.value;
     
-    if (!query || query.length < 3) {
+    if (query.length === 0) {
+        queryResultNotice.removeNotice();
         uiService.clearContainer();
-        queryResultNotice.generateNotice("green", "black", "Введите запрос более 2х символов");
+    } else if (query.length < 3) {
+        uiService.clearContainer();
+        queryResultNotice.generateNotice("light-green", "black", "Введите запрос более 2х символов");
     } else {
+        queryResultNotice.removeNotice();
+        
         newsService.getQueryFilteredNews(query, (response) => {
             const {totalResults, articles} = response;
     
