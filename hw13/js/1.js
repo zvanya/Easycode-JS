@@ -8,7 +8,7 @@
 
 /**
  *
- * @param {BigInteger} ms
+ * @param {Number} ms
  * @param {String} value
  */
 function promiseCreator(ms, value) {
