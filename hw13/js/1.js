@@ -30,23 +30,15 @@ function promiseCreator(ms, value) {
 //    → test
 
 class Prom {
-    
     constructor(){
         this.promise = new Promise((res, rej) => {
-            this._res = res;
-            this._rej = rej;
+            this.resolve = res;
+            this.reject = rej;
         })
-    }
-    
-    resolve(value) {
-        this._res(value);
-    }
-    
-    reject(value) {
-        this._rej(value);
     }
 }
 
 const inst = new Prom();
-inst.promise.then(data => console.log(data));
+inst.promise
+    .then(data => console.log(data));
 inst.resolve("test");
