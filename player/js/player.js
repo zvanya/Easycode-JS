@@ -49,6 +49,7 @@ class VideoPlayer {
     // ----------------
     
     // ***** HW14 *****
+    // !!! Специально сделал в отдельной ф-ции, чтоб потренироваться с dispatchEvent. Можно было бы использовать ф-цию _volumeChange, по аналогии с _playbackRateChange
     _volumeRangeChange(e) {
         e.preventDefault();
         if (e.target.name === "volume") {
